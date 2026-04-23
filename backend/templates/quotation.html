@@ -1,0 +1,327 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">    
+    <style>
+       
+       
+ 
+        body {
+            width: 70%;
+            height: auto;
+            margin-left: auto;
+            margin-right: auto;
+            margin-bottom: 10px;
+            font-family: 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif;
+        }
+    </style>
+    <title>Quotation</title>
+</head>
+<body>
+   
+    <div id="content">
+     
+        <style>
+            @page {
+                size: A4;
+                margin-top: 20px;
+                margin-bottom: 20px;
+                margin-left: 40px;
+                margin-right: 40px;
+            }
+            h1 {
+                text-align: center;
+            }
+            h6 {
+                text-align: center;
+            }
+            table {
+                border-collapse: collapse;
+                width: 100%;
+                background-color: white;
+            }
+            th, td {
+                border: 1px solid black;
+                padding: 2px;
+                padding-top: 4px;
+                font-size: 10px;
+            }
+            th {
+                font-size: 12px;
+            }
+        </style>
+        <div style="border: 1px solid black; margin-bottom: 10px;">
+    <table style="width: 100%; border-collapse: collapse; border: none;">
+        <tr>
+            <td style="width: 30%; border: none; padding: 10px; vertical-align: top; font-size: 10px; line-height: 1.3;">
+                <b>CIN:</b> U73100PN2023PTC218985<br>
+                <b>PAN:</b> AAYCA4132G<br>
+                <b>TAN:</b> KLPA05509A<br>
+                <b>GSTIN:</b> 27AAYCA4132G1ZH
+            </td>
+            
+            <td style="width: 40%; border: none; text-align: center; vertical-align: middle;">
+                <h1 style="font-size: 28px; margin: 0; font-weight: bold; letter-spacing: 1px;">QUOTATION</h1>
+            </td>
+            
+            <td style="width: 30%; border: none; padding: 10px; text-align: right; vertical-align: middle;">
+                <img src="C:\Users\nikhi\Downloads\clone\new\AdBajao\Frontend\src\assets\quotation\HeaderLogoWhiteColouradmin.png" 
+                     alt="AdBajao Logo" 
+                     style="width: 140px; height: auto;">
+            </td>
+        </tr>
+    </table>
+
+    <table style="width: 100%; border-collapse: collapse; border: none; border-top: 1px solid black;">
+        <tr>
+            <td style="border: none; padding: 4px 10px; font-size: 11px; text-align: left;">
+                <b>Ref No:</b> {{refNo}}
+            </td>
+            <td style="border: none; padding: 4px 10px; font-size: 11px; text-align: right;">
+                <b>Date:</b> {{ date }}
+            </td>
+        </tr>
+            </table>
+        </div>
+        
+        <table style="width: 100%;">
+            <thead>
+                <tr>
+                    <th colspan="7" style="text-align: center; background-color: red; color: white;">
+                        QUOTATION FOR ON-SCREEN ADVERTISEMENT IN CINEMAS
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td colspan="1">Client Name</td>
+                    <td colspan="3">{{ customer.name }}</td>
+                    <td colspan="1">Contact Person</td>
+                    <td colspan="2">{{ customer.company_contactperson }}</td>
+                </tr>
+ 
+                <tr>
+                    <td colspan="1">City </td>
+                    <td colspan="3">{{ city }}</td>
+                    <td colspan="1">Contact Number</td>
+                    <td colspan="2">{{ customer.contact_number }}</td>
+                </tr>
+                <tr>
+                    <td colspan="1">GST No</td>
+                    <td colspan="3">{{ customer.gstin }}</td>
+                    <td colspan="1">Media Consultant Name</td>
+                    <td colspan="2">{% if AssociateName %}{{ AssociateName }}{% else %}&nbsp;{% endif %}</td>
+                </tr>
+                <tr>
+                    <td colspan="1">Campaign Duration (In Weeks):</td>
+                    <td id="weeks" colspan="1">{{ quotation_data.weeks }} Weeks</td>
+                    <td colspan="1">Creative Size (In Seconds):</td>
+                    <td id="adLength" colspan="1">{{ quotation_data.adLength }} Seconds</td>
+                    <td colspan="1">Media Consultant Contact </td>
+                    {% if AssociateContact %}
+                        <td colspan="2">{{ AssociateContact }}</td>
+                    {% endif %}
+                </tr>
+                <tr>
+                    <td colspan="1">Ad Position</td>
+                    <td colspan="3">
+                    {% if quotation_data.adPosition == "Both" %}
+                        Before Movie+During Interval
+                    {% else %}
+                        {{ quotation_data.adPosition }}
+                    {% endif %}
+                    </td>
+ 
+                    <td colspan="1">Total Screen Time</td>
+                    <td colspan="2">
+                        {{ campaign_time_seconds }} Seconds
+                        {% comment %} ({{ campaign_time_minutes }} Minutes) {% endcomment %}
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+ 
+        <table style="width:100%">
+            <thead>
+                <tr style="background-color: red; color:white;">
+                    <th colspan="1">Sr.No.</th>
+                    <th colspan="3">Cinema Screen Name</th>
+                    <th colspan="1">WebCode</th>
+                    <th colspan="1">Cinema Category</th>
+                    <th colspan="1">City/ District</th>
+                    <th colspan="1">Seats</th>
+                    <th colspan="1">Spots Offering</th>
+                    <th colspan="1">Rate (<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAsCAYAAAB2d9g5AAABwklEQVR4nO2XvWtUURBHz24iGhAsRIUoRBHxo4hgEawsREyb2kqCCBZiIxY2/iu2tnaihQS0kFQR/AARo0nAQCwkCCLxyFu2WGaf7H13c4OG/cE0jzv3vJm5M+++lspOqr2jNEbA3VrDMWARcEibqyVWbRHsnsPrUc2+HWuFPjwFLAH7hsjaBnAOWE+NMNqYeki9oj5Ut0I0y+pEwj50gktd2GOX1c0AfVASiDofgGtqpzwOsFjDJqf7CzDZ8+wM8D7FMacttgKs0rtRW1TKrWEL+Awc63l2HFjOqWGKbgXYmxRYRxktcVP9FdpiPtW/NSCl48CR7om8CFwHLoQ1T4HZ7gkdrJq3uNtgSD9T9zfJUJs8rQC3gavAZhPH8cR1r4FXwCfgBbDQbf7msj/so+rHkLoNdTpz7pIyvE+oKwG6rp4tBUQ9rX4N0FX1ZCkg6nn1W80Hd6oUEHVG/R6gH9TJUkDUS+qPAH2rHi4FRJ1VfwboknqwFBB1rmaOLqoHSgFRr9Xc3F6mjjgyT9sN9XeAPk+5LuYCK7tjv56oe0sBK7tfA32s7vmbT+4V4//+XSuqdtnt+zUCbrva27/lPwb8AzG5/nNqoJ4AAAAAAElFTkSuQmCC" height="10" style="margin-bottom:-1px;"/>)</th>
+                    <!-- <th colspan="1">Rate (<img src="data:image/png;base64,{{ rupee_icon }}" width="12"/> )</th> -->
+                </tr>
+            </thead>
+            <tbody>
+                <!-- {% for quta in quotation %}
+                <tr data-rate="{{ quta.rate }}" data-adlength="{{ adlength }}" data-weeks="{{ weeks }}">
+                    <td colspan="1" style="text-align: center;">{{forloop.counter}}</td>
+                    <td colspan="3">{{quta.media_name}}</td>
+                    <td colspan="1" style="text-align: center;">{{quta.campaign_category}}</td>
+                    <td colspan="1" style="text-align: center;">{{quta.city}}</td>
+                    <td colspan="1" style="text-align: center;">{{quta.seats_number}}</td>
+                    <td colspan="1" style="text-align: center;">
+                        {% for so in showOfferings %}{% if so.id == quta.id %}{{ so.offering }}{% endif %}{% endfor %} Shows
+                    </td>
+                   
+                    </tr>
+                    {% endfor %}
+                    <td id="rate" colspan="1" style="text-align: center;"> {{total}}</td> -->
+                <!-- <tr data-rate="{{ quta.rate }}" data-adlength="{{ adlength }}" data-weeks="{{ weeks }}">
+                    <td colspan="1" style="text-align: center;">{{forloop.counter}}</td>
+                    <td colspan="3">{{quotation_data.media_name}}</td>
+                    <td colspan="1" style="text-align: center;">{{quotation_data.campaign_category}}</td>
+                    <td colspan="1" style="text-align: center;">{{quotation_data.city}}</td>
+                    <td colspan="1" style="text-align: center;">{{quotation_data.seats_number}}</td>
+                    <td colspan="1" style="text-align: center;">
+                        {% for so in showOfferings %}{% if so.id == quta.id %}{{ so.offering }}{% endif %}{% endfor %} Shows
+                    </td>
+                    <td id="rate" colspan="1" style="text-align: center;" aria-disabled="true">{{quotation_data.total}}</td>
+                </tr> -->
+                {% for quta, total in quotation_with_totals %}
+                <tr data-rate="{{ quta.rate }}" data-adlength="{{ adlength }}" data-weeks="{{ weeks }}">
+                    <td colspan="1" style="text-align: center;">{{ forloop.counter }}</td>
+                    <td colspan="3">{{ quta.media_name }}</td>
+                    <td colspan="1">{{ quta.web_code }}</td>
+                    <td colspan="1" style="text-align: center;">{{ quta.campaign_category }}</td>
+                    <td colspan="1" style="text-align: center;">{{ quta.city }}</td>
+                    <td colspan="1" style="text-align: center;">{{ quta.seats_number }}</td>
+                    <td colspan="1" style="text-align: center;">
+                        {% for so in showOfferings %}{% if so.id == quta.id %}{{ so.offering }}{% endif %}{% endfor %} Spots
+                    </td>
+                    <!-- <td id="rate" colspan="1" style="text-align: center;">{{ quta.rate }}</td> -->
+                    <td id="total" colspan="1" style="text-align: right;"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAsCAYAAAB2d9g5AAABrElEQVR4nO3WzysEYRjA8e+OlZRyEAfUJmlz4cTRQeK6Z8dNykEucnDxr7i6upGDFAdxobhINj+KcJBI4tG77xy2d9/l3Xf3nYPmqTlMM/N+5n2feZ55MyJCkhElqpGC/yGHqK+08gBagCN1qcGjYI5dHt8CrjQB27BhVSAwBLw3iD0CPU6g9Qa9xN3AFLAOfBlACWj/axxxBS0vMAm8GuhaMFA0WjTAOyATElTldGugeS8wLQtCl4XYc5gBrg0o5/Ksby9dAPorzs9EpOTVSx1mNw98GrMrNqUOgSzQB4wBi8CxJWfbrjUoNcpiuY6+uQN01LNCkWcOb+IZT4uIanPOkXW87xQ4BK6AfWBPRFQTrz+keklVzi6NpXsCRnxKSFw+GmAgXrZK9AEYDgKKRvPAvYGqhj0YBBSNjgLPlh9uLggoGh0HXgz0AugNAopGJ4A3Az3/rUlLI2CMzgAfBnoCdAUBRaMFSx9Ve9jOIKBodNaycztwbXF4JR7mgG8D3XXZLnqBMbpkaeZbQFsQMEZXLegm0FrrmfJ/LMmIEtVIwQARhRj0t0hBmh0/c0ZgqUJNofIAAAAASUVORK5CYII=" height="10" style="margin-bottom:-1px;"/>{{ total }}</td>
+                </tr>
+                {% endfor %}
+               
+                <!-- <tr>
+                    <td colspan="9" style="text-align: center;">Totals:</td>
+                    <td colspan="1" style="text-align: center;">
+                        {% for total in total_values %}
+                            {{ total }}{% if not forloop.last %}, {% endif %}
+                        {% endfor %}
+                    </td>
+                </tr> -->
+ 
+                <tr>
+                    <td colspan="1"></td>
+                    <td colspan="6" style="text-align: right;"><b>Grand Total</b></td>
+                    <td colspan="1" style="text-align: center;">{{totalSeats}}</td>
+                    <td colspan="1" style="text-align: center;">{{totalShowOffering}} Spots</td>
+                    <td colspan="1" style="text-align: right;"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAsCAYAAAB2d9g5AAABrElEQVR4nO3WzysEYRjA8e+OlZRyEAfUJmlz4cTRQeK6Z8dNykEucnDxr7i6upGDFAdxobhINj+KcJBI4tG77xy2d9/l3Xf3nYPmqTlMM/N+5n2feZ55MyJCkhElqpGC/yGHqK+08gBagCN1qcGjYI5dHt8CrjQB27BhVSAwBLw3iD0CPU6g9Qa9xN3AFLAOfBlACWj/axxxBS0vMAm8GuhaMFA0WjTAOyATElTldGugeS8wLQtCl4XYc5gBrg0o5/Ksby9dAPorzs9EpOTVSx1mNw98GrMrNqUOgSzQB4wBi8CxJWfbrjUoNcpiuY6+uQN01LNCkWcOb+IZT4uIanPOkXW87xQ4BK6AfWBPRFQTrz+keklVzi6NpXsCRnxKSFw+GmAgXrZK9AEYDgKKRvPAvYGqhj0YBBSNjgLPlh9uLggoGh0HXgz0AugNAopGJ4A3Az3/rUlLI2CMzgAfBnoCdAUBRaMFSx9Ve9jOIKBodNaycztwbXF4JR7mgG8D3XXZLnqBMbpkaeZbQFsQMEZXLegm0FrrmfJ/LMmIEtVIwQARhRj0t0hBmh0/c0ZgqUJNofIAAAAASUVORK5CYII=" height="10" style="margin-bottom:-1px;"/>{{ formatted_gross_total }} </td>
+                </tr>
+ 
+                <tr>
+                    <td colspan="6"><b>Bank Details: </b></td>
+                    <td colspan="3" style="text-align: right;">
+                        Discount {{ discount_rate_numeric_coupen }}%
+                    </td>
+                    <td colspan="1" style="text-align: right;">  <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAsCAYAAAB2d9g5AAABrElEQVR4nO3WzysEYRjA8e+OlZRyEAfUJmlz4cTRQeK6Z8dNykEucnDxr7i6upGDFAdxobhINj+KcJBI4tG77xy2d9/l3Xf3nYPmqTlMM/N+5n2feZ55MyJCkhElqpGC/yGHqK+08gBagCN1qcGjYI5dHt8CrjQB27BhVSAwBLw3iD0CPU6g9Qa9xN3AFLAOfBlACWj/axxxBS0vMAm8GuhaMFA0WjTAOyATElTldGugeS8wLQtCl4XYc5gBrg0o5/Ksby9dAPorzs9EpOTVSx1mNw98GrMrNqUOgSzQB4wBi8CxJWfbrjUoNcpiuY6+uQN01LNCkWcOb+IZT4uIanPOkXW87xQ4BK6AfWBPRFQTrz+keklVzi6NpXsCRnxKSFw+GmAgXrZK9AEYDgKKRvPAvYGqhj0YBBSNjgLPlh9uLggoGh0HXgz0AugNAopGJ4A3Az3/rUlLI2CMzgAfBnoCdAUBRaMFSx9Ve9jOIKBodNaycztwbXF4JR7mgG8D3XXZLnqBMbpkaeZbQFsQMEZXLegm0FrrmfJ/LMmIEtVIwQARhRj0t0hBmh0/c0ZgqUJNofIAAAAASUVORK5CYII=" height="10" style="margin-bottom:-1px;"/>{{ formatted_discount|floatformat:2 }} </td>
+                </tr>
+ 
+                <tr>
+                    <td colspan="6">Account Name: ADSPICE MEDIA SOLUTIONS PVT LTD </td>
+                    <td colspan="3" style="text-align: right;"><b>Discounted Total</b></td>
+                    <td colspan="1" style="text-align: right;"> <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAsCAYAAAB2d9g5AAABrElEQVR4nO3WzysEYRjA8e+OlZRyEAfUJmlz4cTRQeK6Z8dNykEucnDxr7i6upGDFAdxobhINj+KcJBI4tG77xy2d9/l3Xf3nYPmqTlMM/N+5n2feZ55MyJCkhElqpGC/yGHqK+08gBagCN1qcGjYI5dHt8CrjQB27BhVSAwBLw3iD0CPU6g9Qa9xN3AFLAOfBlACWj/axxxBS0vMAm8GuhaMFA0WjTAOyATElTldGugeS8wLQtCl4XYc5gBrg0o5/Ksby9dAPorzs9EpOTVSx1mNw98GrMrNqUOgSzQB4wBi8CxJWfbrjUoNcpiuY6+uQN01LNCkWcOb+IZT4uIanPOkXW87xQ4BK6AfWBPRFQTrz+keklVzi6NpXsCRnxKSFw+GmAgXrZK9AEYDgKKRvPAvYGqhj0YBBSNjgLPlh9uLggoGh0HXgz0AugNAopGJ4A3Az3/rUlLI2CMzgAfBnoCdAUBRaMFSx9Ve9jOIKBodNaycztwbXF4JR7mgG8D3XXZLnqBMbpkaeZbQFsQMEZXLegm0FrrmfJ/LMmIEtVIwQARhRj0t0hBmh0/c0ZgqUJNofIAAAAASUVORK5CYII=" height="10" style="margin-bottom:-1px;"/>{{ formatted_discounted_total }}</td>
+                </tr>
+ 
+                <tr>
+                    <td colspan="6">Branch: KURUNDWAD </td>
+                    <td colspan="3" style="text-align: right;">Effective Cost Per Sec </td>
+                    <td colspan="1" style="text-align: right;">
+                        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAsCAYAAAB2d9g5AAABrElEQVR4nO3WzysEYRjA8e+OlZRyEAfUJmlz4cTRQeK6Z8dNykEucnDxr7i6upGDFAdxobhINj+KcJBI4tG77xy2d9/l3Xf3nYPmqTlMM/N+5n2feZ55MyJCkhElqpGC/yGHqK+08gBagCN1qcGjYI5dHt8CrjQB27BhVSAwBLw3iD0CPU6g9Qa9xN3AFLAOfBlACWj/axxxBS0vMAm8GuhaMFA0WjTAOyATElTldGugeS8wLQtCl4XYc5gBrg0o5/Ksby9dAPorzs9EpOTVSx1mNw98GrMrNqUOgSzQB4wBi8CxJWfbrjUoNcpiuY6+uQN01LNCkWcOb+IZT4uIanPOkXW87xQ4BK6AfWBPRFQTrz+keklVzi6NpXsCRnxKSFw+GmAgXrZK9AEYDgKKRvPAvYGqhj0YBBSNjgLPlh9uLggoGh0HXgz0AugNAopGJ4A3Az3/rUlLI2CMzgAfBnoCdAUBRaMFSx9Ve9jOIKBodNaycztwbXF4JR7mgG8D3XXZLnqBMbpkaeZbQFsQMEZXLegm0FrrmfJ/LMmIEtVIwQARhRj0t0hBmh0/c0ZgqUJNofIAAAAASUVORK5CYII=" height="10" style="margin-bottom:-1px;"/>{{ effective_cost_per_show }}
+                    </td>
+                </tr>
+ 
+                <tr>
+                    <td colspan="6">Bank: HDFC BANK</td>
+                    <td colspan="3" style="text-align: right;">Taxable Amount </td>
+                    <td colspan="1" style="text-align: right;"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAsCAYAAAB2d9g5AAABrElEQVR4nO3WzysEYRjA8e+OlZRyEAfUJmlz4cTRQeK6Z8dNykEucnDxr7i6upGDFAdxobhINj+KcJBI4tG77xy2d9/l3Xf3nYPmqTlMM/N+5n2feZ55MyJCkhElqpGC/yGHqK+08gBagCN1qcGjYI5dHt8CrjQB27BhVSAwBLw3iD0CPU6g9Qa9xN3AFLAOfBlACWj/axxxBS0vMAm8GuhaMFA0WjTAOyATElTldGugeS8wLQtCl4XYc5gBrg0o5/Ksby9dAPorzs9EpOTVSx1mNw98GrMrNqUOgSzQB4wBi8CxJWfbrjUoNcpiuY6+uQN01LNCkWcOb+IZT4uIanPOkXW87xQ4BK6AfWBPRFQTrz+keklVzi6NpXsCRnxKSFw+GmAgXrZK9AEYDgKKRvPAvYGqhj0YBBSNjgLPlh9uLggoGh0HXgz0AugNAopGJ4A3Az3/rUlLI2CMzgAfBnoCdAUBRaMFSx9Ve9jOIKBodNaycztwbXF4JR7mgG8D3XXZLnqBMbpkaeZbQFsQMEZXLegm0FrrmfJ/LMmIEtVIwQARhRj0t0hBmh0/c0ZgqUJNofIAAAAASUVORK5CYII=" height="10" style="margin-bottom:-1px;"/>{{ formatted_total_taxable_amount }} </td>
+                </tr>
+               
+                <tr>
+                    <td colspan="6">Account Number: 50200076700878 </td>
+                    <td colspan="3" style="text-align: right;">GST 18%</td>
+                    <td colspan="1" style="text-align: right;"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAsCAYAAAB2d9g5AAABrElEQVR4nO3WzysEYRjA8e+OlZRyEAfUJmlz4cTRQeK6Z8dNykEucnDxr7i6upGDFAdxobhINj+KcJBI4tG77xy2d9/l3Xf3nYPmqTlMM/N+5n2feZ55MyJCkhElqpGC/yGHqK+08gBagCN1qcGjYI5dHt8CrjQB27BhVSAwBLw3iD0CPU6g9Qa9xN3AFLAOfBlACWj/axxxBS0vMAm8GuhaMFA0WjTAOyATElTldGugeS8wLQtCl4XYc5gBrg0o5/Ksby9dAPorzs9EpOTVSx1mNw98GrMrNqUOgSzQB4wBi8CxJWfbrjUoNcpiuY6+uQN01LNCkWcOb+IZT4uIanPOkXW87xQ4BK6AfWBPRFQTrz+keklVzi6NpXsCRnxKSFw+GmAgXrZK9AEYDgKKRvPAvYGqhj0YBBSNjgLPlh9uLggoGh0HXgz0AugNAopGJ4A3Az3/rUlLI2CMzgAfBnoCdAUBRaMFSx9Ve9jOIKBodNaycztwbXF4JR7mgG8D3XXZLnqBMbpkaeZbQFsQMEZXLegm0FrrmfJ/LMmIEtVIwQARhRj0t0hBmh0/c0ZgqUJNofIAAAAASUVORK5CYII=" height="10" style="margin-bottom:-1px;"/>{{ formatted_gst }}</td>
+                </tr>
+                <tr>
+                    <td colspan="6">IFSC: HDFC0009342 </td>
+                    <td colspan="3" style="text-align: right;"><b>Total Payable Amount</b> </td>
+                    <td colspan="1" style="text-align: right;"><b><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAsCAYAAAB2d9g5AAABrElEQVR4nO3WzysEYRjA8e+OlZRyEAfUJmlz4cTRQeK6Z8dNykEucnDxr7i6upGDFAdxobhINj+KcJBI4tG77xy2d9/l3Xf3nYPmqTlMM/N+5n2feZ55MyJCkhElqpGC/yGHqK+08gBagCN1qcGjYI5dHt8CrjQB27BhVSAwBLw3iD0CPU6g9Qa9xN3AFLAOfBlACWj/axxxBS0vMAm8GuhaMFA0WjTAOyATElTldGugeS8wLQtCl4XYc5gBrg0o5/Ksby9dAPorzs9EpOTVSx1mNw98GrMrNqUOgSzQB4wBi8CxJWfbrjUoNcpiuY6+uQN01LNCkWcOb+IZT4uIanPOkXW87xQ4BK6AfWBPRFQTrz+keklVzi6NpXsCRnxKSFw+GmAgXrZK9AEYDgKKRvPAvYGqhj0YBBSNjgLPlh9uLggoGh0HXgz0AugNAopGJ4A3Az3/rUlLI2CMzgAfBnoCdAUBRaMFSx9Ve9jOIKBodNaycztwbXF4JR7mgG8D3XXZLnqBMbpkaeZbQFsQMEZXLegm0FrrmfJ/LMmIEtVIwQARhRj0t0hBmh0/c0ZgqUJNofIAAAAASUVORK5CYII=" height="10" style="margin-bottom:-1px;"/>{{ formatted_total_payable_amount }}</b>
+                    </td>
+                </tr>
+ 
+                <tr>
+                    <td colspan="6">
+                        <b>*Note</b>: Estimated Audience Reach is calculated by 30% occupancy of seating
+                        capacity.
+                    </td>
+                    <td colspan="3" style="text-align: right;">Estimated Average Audience Reach</td>
+                    <td colspan="1" style="text-align: center;">{{avgAudReach}} Footfalls</td>
+                </tr>
+ 
+                <tr>
+                    <td colspan="10">
+                        <span style="font-size: 11px;"><b>Terms & Conditions: </b></span><br>
+                            1. 100% Advance payment is Mandatory. <br>
+                            2. All required documents, creative (in .Mov format) should provide before 48 Hrs.of Release
+                                Date
+                                of campaign. <br>
+                            3. Video Commercial Ads required Censor Certificate, which will cost extra and it can take a minimum of 5 working days to obtain from CBFC.
+                    </td>
+                </tr>
+ 
+                <tr>
+                    <td colspan="10"
+                        style="font-family:'Calibri Light (Headings)';font-size:9px;background-color:#e61e25;color:white; height: 70px;">
+                        <center>
+                            <span style="color:white;font-size:25px;"><b>ADSPICE MEDIA SOLUTIONS PRIVATE LIMITED</b></span><br><br>
+                            <span style="font-size:20px;">
+                                <!-- <b><i class="ion-ios-location"></i>&nbsp;<span>Address:</span>
+                                &nbsp; -->
+                                Reg.
+                                Office: S-2, Second Floor, S-Square(Regular) Building, Opp- Vivo Service
+                                Center,<br><br>
+                                100 Feet
+                                Road
+                                Corner,Sangli-Kolhapur, Sangli. Dist.- Sangli. Maharashtra. 416106</span><br /><br>
+                            <span style="font-size:20px;"> <i class="ion-ios-telephone"></i>&nbsp;<span>Customer
+                                    Support:</span>&nbsp;02322-2991148,&nbsp;+91 9209299848 <i
+                                    class="ion-ios-website"></i>&nbsp;<span>Website:</span>&nbsp;www.adbajao.com
+                                &nbsp; <i class="ion-android-mail"></i>&nbsp; <span>E-Mail:</span>
+                                sales@adbajao.com</span><br /></b>
+                        </center>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+ 
+   
+ 
+ 
+<!-- <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const rows = document.querySelectorAll("tr[data-rate]");
+ 
+        rows.forEach(row => {
+            const rate = parseFloat(row.getAttribute("data-rate"));
+            const adlength = parseFloat(row.getAttribute("data-adlength"));
+            const weeks = parseFloat(row.getAttribute("data-weeks"));
+           
+            if (!isNaN(rate) && !isNaN(adlength) && !isNaN(weeks)) {
+                const calculateRate = rate * adlength * weeks;
+                row.querySelector(".calculated-rate").innerText = calculateRate.toFixed(2);
+            } else {
+                row.querySelector(".calculated-rate").innerText = 'N/A';
+            }
+        });
+    });
+</script> -->
+ 
+</body>
+</html>
+ 
