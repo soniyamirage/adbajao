@@ -1,0 +1,234 @@
+﻿<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        html, body {
+            width: 100%;
+            margin: 0;
+            padding: 0;
+            font-family: 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif;
+            font-size: 9px;
+            line-height: 1.2;
+        }
+        @page {
+            size: A4;
+            margin: 10mm;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            background-color: white;
+            page-break-inside: auto;
+        }
+        tr {
+            page-break-inside: avoid;
+            page-break-after: auto;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 4px;
+            font-size: 9px;
+            vertical-align: top;
+        }
+        th {
+            font-size: 10px;
+            font-weight: bold;
+        }
+        h1 {
+            font-size: 24px;
+            margin: 0;
+        }
+        .section-header {
+            background-color: #e61e25;
+            color: white;
+            font-weight: bold;
+            padding: 6px;
+        }
+        .text-right {
+            text-align: right;
+        }
+        .text-center {
+            text-align: center;
+        }
+        td {
+            line-height: 1.2;
+        }
+    </style>
+    <title>Release Order</title>
+</head>
+<body>
+    <div id="content">
+        <div style="border: 1px solid black; margin-bottom: 4px;">
+            <table style="width: 100%; border: none;">
+                <tr>
+                    <td style="width: 30%; border: none; padding: 10px; font-size: 10px; line-height: 1.5; vertical-align: top;">
+                        <b>CIN:</b> U73100PN2023PTC218985<br>
+                        <b>PAN:</b> AAYCA4132G<br>
+                        <b>TAN:</b> KLPA05509A<br>
+                        <b>GSTIN:</b> 27AAYCA4132G1ZH
+                    </td>
+                    <td style="width: 40%; border: none; text-align: center; vertical-align: middle; padding: 10px;">
+                        <h1 style="font-size: 28px; margin: 0; font-weight: bold; letter-spacing: 1px;">Release Order</h1>
+                    </td>
+                    <td style="width: 30%; border: none; padding: 10px; text-align: center; vertical-align: middle;">
+                        <span style="font-size: 12px; font-weight: bold;">Partner Logo here</span>
+                    </td>
+                </tr>
+            </table>
+            <table style="width: 100%; border: none; border-top: 1px solid black;">
+                <tr>
+                    <td style="border: none; padding: 6px 10px; font-size: 11px; text-align: left;">
+                        <b>RO No:</b> {{ ro_number }}
+                    </td>
+                    <td style="border: none; padding: 6px 10px; font-size: 11px; text-align: right;">
+                        <b>RO Date:</b> {{ ro_date }}
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <table style="border: 1px solid black; margin-bottom: 4px;">
+            <tr>
+                <td class="section-header">Release Order To</td>
+            </tr>
+            <tr>
+                <td style="padding: 8px; font-weight: bold;">Company Name – Adspice Media Solutions Private Limited</td>
+            </tr>
+        </table>
+
+        <table style="border: 1px solid black; margin-bottom: 4px;">
+            <tr>
+                <td style="width: 25%; padding: 6px;"><b>Contact Person</b></td>
+                <td style="width: 25%; padding: 8px;">Amol Hegannavar </td>
+                <td style="width: 25%; padding: 8px;"><b>Phone No</b></td>
+                <td style="width: 25%; padding: 8px;">7020716198</td>
+            </tr>
+        </table>
+
+        <table style="border: 1px solid black; margin-bottom: 4px;">
+            <thead>
+                <tr>
+                    <th colspan="4" class="section-header">Campaign Details</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td style="width: 20%;"><b>Client Name</b></td>
+                    <td style="width: 30%;">{{ customer.name|default:"-" }}</td>
+                    <td style="width: 20%;"><b>Creative Type</b></td>
+                    <td style="width: 30%;">
+                        {% if book_campaign.ad_type == "0" or book_campaign.ad_type == 0 %}
+                            Audio Slide
+                        {% elif book_campaign.ad_type == "1" or book_campaign.ad_type == 1 %}
+                            Mute Slide
+                        {% elif book_campaign.ad_type == "2" or book_campaign.ad_type == 2 %}
+                            Video Ads
+                        {% else %}
+                            {{ book_campaign.ad_type|default:"-" }}
+                        {% endif %}
+                    </td>
+                </tr>
+                <tr>
+                    <td><b>City</b></td>
+                    <td>{{ book_campaign.city_code|default:"-" }}</td>
+                    <td><b>Creative Name</b></td>
+                    <td>{{ customer.name|default:"-" }}-{{ book_campaign.ads_in_second|default:"-" }} Sec</td>
+                </tr>
+                <tr>
+                    <td><b>Campaign Duration (In Weeks)</b></td>
+                    <td>{{ book_campaign.week|default:"-" }} Weeks</td>
+                    <td><b>Creative Size (In Seconds)</b></td>
+                    <td>{{ book_campaign.ads_in_second|default:"-" }} Sec</td>
+                </tr>
+                <tr>
+                    <td><b>Ad Position</b></td>
+                    <td colspan="3">
+                        {% if book_campaign.ad_position == "0" or book_campaign.ad_position == 0 %}
+                            Before movie
+                        {% elif book_campaign.ad_position == "1" or book_campaign.ad_position == 1 %}
+                            During interval
+                        {% elif book_campaign.ad_position == "2" or book_campaign.ad_position == 2 %}
+                            Both (Before & Interval)
+                        {% else %}
+                            {{ book_campaign.ad_position|default:"-" }}
+                        {% endif %}
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <table style="border: 1px solid black; margin-bottom: 4px;">
+            <thead>
+                <tr class="section-header">
+                    <th style="width: 8%;">Sr. No.</th>
+                    <th style="width: 30%;">Cinema Screen Name</th>
+                    <th style="width: 15%;">Web Code</th>
+                    <th style="width: 15%;">City/ District</th>
+                    <th style="width: 12%;">Seats</th>
+                    <th style="width: 20%;">Rate (<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAsCAYAAAB2d9g5AAABrElEQVR4nO3WzysEYRjA8e+OlZRyEAfUJmlz4cTRQeK6Z8dNykEucnDxr7i6upGDFAdxobhINj+KcJBI4tG77xy2d9/l3Xf3nYPmqTlMM/N+5n2feZ55MyJCkhElqpGC/yGHqK+08gBagCN1qcGjYI5dHt8CrjQB27BhVSAwBLw3iD0CPU6g9Qa9xN3AFLAOfBlACWj/axxxBS0vMAm8GuhaMFA0WjTAOyATElTldGugeS8wLQtCl4XYc5gBrg0o5/Ksby9dAPorzs9EpOTVSx1mNw98GrMrNqUOgSzQB4wBi8CxJWfbrjUoNcpiuY6+uQN01LNCkWcOb+IZT4uIanPOkXW87xQ4BK6AfWBPRFQTrz+keklVzi6NpXsCRnxKSFw+GmAgXrZK9AEYDgKKRvPAvYGqhj0YBBSNjgLPlh9uLggoGh0HXgz0AugNAopGJ4A3Az3/rUlLI2CMzgAfBnoCdAUBRaMFSx9Ve9jOIKBodNaycztwbXF4JR7mgG8D3XXZLnqBMbpkaeZbQFsQMEZXLegm0FrrmfJ/LMmIEtVIwQARhRj0t0hBmh0/c0ZgqUJNofIAAAAASUVORK5CYII=" width="6" height="10" style="margin-bottom:-1px;"/>)</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in campaign_items %}
+                <tr>
+                    <td class="text-center">{{ forloop.counter }}</td>
+                    <td>{{ item.media_name|default:"-" }}</td>
+                    <td class="text-center">{{ item.screen_number|default:"-" }}</td>
+                    <td class="text-center">{{ item.city_code|default:"-" }}</td>
+                    <td class="text-center">{{ item.number_seats|default:"0" }}</td>
+                    <td class="text-right"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAsCAYAAAB2d9g5AAABrElEQVR4nO3WzysEYRjA8e+OlZRyEAfUJmlz4cTRQeK6Z8dNykEucnDxr7i6upGDFAdxobhINj+KcJBI4tG77xy2d9/l3Xf3nYPmqTlMM/N+5n2feZ55MyJCkhElqpGC/yGHqK+08gBagCN1qcGjYI5dHt8CrjQB27BhVSAwBLw3iD0CPU6g9Qa9xN3AFLAOfBlACWj/axxxBS0vMAm8GuhaMFA0WjTAOyATElTldGugeS8wLQtCl4XYc5gBrg0o5/Ksby9dAPorzs9EpOTVSx1mNw98GrMrNqUOgSzQB4wBi8CxJWfbrjUoNcpiuY6+uQN01LNCkWcOb+IZT4uIanPOkXW87xQ4BK6AfWBPRFQTrz+keklVzi6NpXsCRnxKSFw+GmAgXrZK9AEYDgKKRvPAvYGqhj0YBBSNjgLPlh9uLggoGh0HXgz0AugNAopGJ4A3Az3/rUlLI2CMzgAfBnoCdAUBRaMFSx9Ve9jOIKBodNaycztwbXF4JR7mgG8D3XXZLnqBMbpkaeZbQFsQMEZXLegm0FrrmfJ/LMmIEtVIwQARhRj0t0hBmh0/c0ZgqUJNofIAAAAASUVORK5CYII=" width="6" height="10" style="margin-bottom:-1px;"/> {{ item.price|default:0|floatformat:1 }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <table style="border: 1px solid black; margin-bottom: 4px;">
+            <tbody>
+                <tr>
+                    <td colspan="4" class="text-right" style="font-weight: bold;">Grand Total</td>
+                    <td class="text-center">{{ total_seats }}</td>
+                    <td class="text-right" style="font-weight: bold;"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAsCAYAAAB2d9g5AAABrElEQVR4nO3WzysEYRjA8e+OlZRyEAfUJmlz4cTRQeK6Z8dNykEucnDxr7i6upGDFAdxobhINj+KcJBI4tG77xy2d9/l3Xf3nYPmqTlMM/N+5n2feZ55MyJCkhElqpGC/yGHqK+08gBagCN1qcGjYI5dHt8CrjQB27BhVSAwBLw3iD0CPU6g9Qa9xN3AFLAOfBlACWj/axxxBS0vMAm8GuhaMFA0WjTAOyATElTldGugeS8wLQtCl4XYc5gBrg0o5/Ksby9dAPorzs9EpOTVSx1mNw98GrMrNqUOgSzQB4wBi8CxJWfbrjUoNcpiuY6+uQN01LNCkWcOb+IZT4uIanPOkXW87xQ4BK6AfWBPRFQTrz+keklVzi6NpXsCRnxKSFw+GmAgXrZK9AEYDgKKRvPAvYGqhj0YBBSNjgLPlh9uLggoGh0HXgz0AugNAopGJ4A3Az3/rUlLI2CMzgAfBnoCdAUBRaMFSx9Ve9jOIKBodNaycztwbXF4JR7mgG8D3XXZLnqBMbpkaeZbQFsQMEZXLegm0FrrmfJ/LMmIEtVIwQARhRj0t0hBmh0/c0ZgqUJNofIAAAAASUVORK5CYII=" width="6" height="10" style="margin-bottom:-1px;"/> {{ grand_total }}</td>
+                </tr>
+                <tr>
+                    <td colspan="2" rowspan="4" style="padding: 12px; vertical-align: top; font-weight: bold;">
+                        Name of Signing Authority<br>
+                        Agency Signing Authority Name here
+                    </td>
+                    <td colspan="3" class="text-right">Censor Certification Charges</td>
+                    <td class="text-right"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAsCAYAAAB2d9g5AAABrElEQVR4nO3WzysEYRjA8e+OlZRyEAfUJmlz4cTRQeK6Z8dNykEucnDxr7i6upGDFAdxobhINj+KcJBI4tG77xy2d9/l3Xf3nYPmqTlMM/N+5n2feZ55MyJCkhElqpGC/yGHqK+08gBagCN1qcGjYI5dHt8CrjQB27BhVSAwBLw3iD0CPU6g9Qa9xN3AFLAOfBlACWj/axxxBS0vMAm8GuhaMFA0WjTAOyATElTldGugeS8wLQtCl4XYc5gBrg0o5/Ksby9dAPorzs9EpOTVSx1mNw98GrMrNqUOgSzQB4wBi8CxJWfbrjUoNcpiuY6+uQN01LNCkWcOb+IZT4uIanPOkXW87xQ4BK6AfWBPRFQTrz+keklVzi6NpXsCRnxKSFw+GmAgXrZK9AEYDgKKRvPAvYGqhj0YBBSNjgLPlh9uLggoGh0HXgz0AugNAopGJ4A3Az3/rUlLI2CMzgAfBnoCdAUBRaMFSx9Ve9jOIKBodNaycztwbXF4JR7mgG8D3XXZLnqBMbpkaeZbQFsQMEZXLegm0FrrmfJ/LMmIEtVIwQARhRj0t0hBmh0/c0ZgqUJNofIAAAAASUVORK5CYII=" width="6" height="10" style="margin-bottom:-1px;"/> {{ censor_charges }}</td>
+                </tr>
+                <tr>
+                    <td colspan="3" class="text-right">Taxable Amount</td>
+                    <td class="text-right"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAsCAYAAAB2d9g5AAABrElEQVR4nO3WzysEYRjA8e+OlZRyEAfUJmlz4cTRQeK6Z8dNykEucnDxr7i6upGDFAdxobhINj+KcJBI4tG77xy2d9/l3Xf3nYPmqTlMM/N+5n2feZ55MyJCkhElqpGC/yGHqK+08gBagCN1qcGjYI5dHt8CrjQB27BhVSAwBLw3iD0CPU6g9Qa9xN3AFLAOfBlACWj/axxxBS0vMAm8GuhaMFA0WjTAOyATElTldGugeS8wLQtCl4XYc5gBrg0o5/Ksby9dAPorzs9EpOTVSx1mNw98GrMrNqUOgSzQB4wBi8CxJWfbrjUoNcpiuY6+uQN01LNCkWcOb+IZT4uIanPOkXW87xQ4BK6AfWBPRFQTrz+keklVzi6NpXsCRnxKSFw+GmAgXrZK9AEYDgKKRvPAvYGqhj0YBBSNjgLPlh9uLggoGh0HXgz0AugNAopGJ4A3Az3/rUlLI2CMzgAfBnoCdAUBRaMFSx9Ve9jOIKBodNaycztwbXF4JR7mgG8D3XXZLnqBMbpkaeZbQFsQMEZXLegm0FrrmfJ/LMmIEtVIwQARhRj0t0hBmh0/c0ZgqUJNofIAAAAASUVORK5CYII=" width="6" height="10" style="margin-bottom:-1px;"/> {{ taxable_amount }}</td>
+                </tr>
+                <tr>
+                    <td colspan="3" class="text-right" style="font-weight: bold;">GST 18%</td>
+                    <td class="text-right" style="font-weight: bold;"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAsCAYAAAB2d9g5AAABrElEQVR4nO3WzysEYRjA8e+OlZRyEAfUJmlz4cTRQeK6Z8dNykEucnDxr7i6upGDFAdxobhINj+KcJBI4tG77xy2d9/l3Xf3nYPmqTlMM/N+5n2feZ55MyJCkhElqpGC/yGHqK+08gBagCN1qcGjYI5dHt8CrjQB27BhVSAwBLw3iD0CPU6g9Qa9xN3AFLAOfBlACWj/axxxBS0vMAm8GuhaMFA0WjTAOyATElTldGugeS8wLQtCl4XYc5gBrg0o5/Ksby9dAPorzs9EpOTVSx1mNw98GrMrNqUOgSzQB4wBi8CxJWfbrjUoNcpiuY6+uQN01LNCkWcOb+IZT4uIanPOkXW87xQ4BK6AfWBPRFQTrz+keklVzi6NpXsCRnxKSFw+GmAgXrZK9AEYDgKKRvPAvYGqhj0YBBSNjgLPlh9uLggoGh0HXgz0AugNAopGJ4A3Az3/rUlLI2CMzgAfBnoCdAUBRaMFSx9Ve9jOIKBodNaycztwbXF4JR7mgG8D3XXZLnqBMbpkaeZbQFsQMEZXLegm0FrrmfJ/LMmIEtVIwQARhRj0t0hBmh0/c0ZgqUJNofIAAAAASUVORK5CYII=" width="6" height="10" style="margin-bottom:-1px;"/> {{ gst_amount }}</td>
+                </tr>
+                <tr>
+                    <td colspan="3" class="text-right" style="font-weight: bold;">Total Payable Amount</td>
+                    <td class="text-right" style="font-weight: bold;"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAsCAYAAAB2d9g5AAABrElEQVR4nO3WzysEYRjA8e+OlZRyEAfUJmlz4cTRQeK6Z8dNykEucnDxr7i6upGDFAdxobhINj+KcJBI4tG77xy2d9/l3Xf3nYPmqTlMM/N+5n2feZ55MyJCkhElqpGC/yGHqK+08gBagCN1qcGjYI5dHt8CrjQB27BhVSAwBLw3iD0CPU6g9Qa9xN3AFLAOfBlACWj/axxxBS0vMAm8GuhaMFA0WjTAOyATElTldGugeS8wLQtCl4XYc5gBrg0o5/Ksby9dAPorzs9EpOTVSx1mNw98GrMrNqUOgSzQB4wBi8CxJWfbrjUoNcpiuY6+uQN01LNCkWcOb+IZT4uIanPOkXW87xQ4BK6AfWBPRFQTrz+keklVzi6NpXsCRnxKSFw+GmAgXrZK9AEYDgKKRvPAvYGqhj0YBBSNjgLPlh9uLggoGh0HXgz0AugNAopGJ4A3Az3/rUlLI2CMzgAfBnoCdAUBRaMFSx9Ve9jOIKBodNaycztwbXF4JR7mgG8D3XXZLnqBMbpkaeZbQFsQMEZXLegm0FrrmfJ/LMmIEtVIwQARhRj0t0hBmh0/c0ZgqUJNofIAAAAASUVORK5CYII=" width="6" height="10" style="margin-bottom:-1px;"/> {{ total_payable }}</td>
+                </tr>
+                <tr>
+                    <td colspan="6" style="padding: 8px;"><b>Amounts in words:</b> {{ amount_in_words }}</td>
+                </tr>
+                <tr>
+                    <td colspan="6" style="padding: 8px;"><b>Terms & Conditions:</b><br>
+                        1. 100% Advance payment is Mandatory.<br>
+                        2. All required documents, creative (in .Mov/MP4 format) should provide before 48 Hrs. of Release Date of campaign.<br>
+                        3. Video Commercial Ads required Censor Certificate, which will cost extra and it can take a minimum of 5 working days to get.
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="6" class="section-header" style="padding: 12px; text-align: center;">
+                        <div style="font-size: 16px; font-weight: bold; margin-bottom: 4px;">ADSPICE MEDIA SOLUTIONS PRIVATE LIMITED</div>
+                        <div style="font-size: 10px; margin-bottom: 3px;">Reg. Office: S-2, Second Floor, S-Square (Regular) Building, Opp- Vivo Service Center, 100 Feet Road Corner, Sangli-Kolhapur, Sangli. Dist.- Sangli. Maharashtra. 416106</div>
+                        <div style="font-size: 10px;">Customer Support: 02322-2991148, +91 9209299848 | Website: www.adbajao.com | E-Mail: sales@adbajao.com</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+ </body>
+</html>
